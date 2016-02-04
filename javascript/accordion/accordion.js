@@ -6,4 +6,12 @@ $(document).ready(function(){
     $(this).children().show("slow");
   })
 
+  $(document).on("keydown", function(e){
+    if(e.which == 38){
+      alert("up");
+    }else if(e.which == 40){
+      alert("down");
+    }
+  })
+
 });
