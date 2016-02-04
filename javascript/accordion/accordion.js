@@ -1,42 +1,28 @@
 $(document).ready(function(){
 
+  $('.accordion-header > div').hide();
 
   $('.accordion-header').on("click", function(){
-    $('.accordion-header > div').removeClass("active").hide("slow");
-    $(this).find("div").addClass("active").show("slow");
+    $('.accordion-header > div').hide("slow");
+    $(this).find("div").show("slow");
   })
 
-  $(document).on("keydown", function(e){
+  $(".accordion-header").on("keydown", function(e){
+    var target = $(this).first();
+
     if(e.which == 38){
-      var target = $('active');
-      $('.active').css("color", "red");
+      var previous = target.prev().first("div");
+      previous.show("slow");
     }else if(e.which == 40){
-      $('.active').css("color", "green");
+      var next = target.next().first("div");
+      next.show("slow");
     }
   })
 
-  //   $(".list-item").bind({
-  //   keydown: function(e) {
-  //     var key = e.keyCode;
-  //     var target = $(e.currentTarget);
+    $(".accordion-header").bind({
+      keydown: function(e) {
+      },
 
-  //     switch(key) {
-  //       case 38: // arrow up
-  //         target.prev().focus();
-  //         break;
-  //       case 40: // arrow down
-  //         target.next().focus();
-  //         break;
-  //     }
-  //   },
+  });
 
-  //   focusin: function(e) {
-  //     $(e.currentTarget).addClass("selected");
-  //   },
-
-  //   focusout: function(e) {
-  //     $(e.currentTarget).removeClass("selected");
-  //   }
-  // });
-  // $("li").first().focus();
 });
