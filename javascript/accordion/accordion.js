@@ -7,21 +7,22 @@ $(document).ready(function(){
     $(this).find("div").show("slow");
   })
 
-  $(".accordion-header").on("keydown", function(e){
-    var target = $(this).first();
+  $("div:visible").closest(".accordion-header").on("keydown", function(e){
+    var target = $(this).first("div");
+    $(".accordion-header > div:visible").hide("slow");
 
     if(e.which == 38){
       var previous = target.prev().first("div");
-      previous.show("slow");
+      previous.children("div").show("slow");
     }else if(e.which == 40){
       var next = target.next().first("div");
-      next.show("slow");
+      next.children("div").show("slow");
     }
   })
 
-    $(".accordion-header").bind({
-      keydown: function(e) {
-      },
+  $(".accordion-header").bind({
+    keydown: function(e) {
+  },
 
   });
 
