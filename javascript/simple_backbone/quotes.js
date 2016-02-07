@@ -1,12 +1,6 @@
 //Model
 var Quote = Backbone.Model.extend({
-  rootUrl: "http://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json",
-  defaults: {
-    context: "",
-    quote: "",
-    source: "",
-    theme: ""
-  }
+  rootUrl: "http://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json"
 });
 
 //Collection
@@ -20,20 +14,33 @@ var Quotes = Backbone.Collection.extend({
 
 var quotes = new Quotes();
 quotes.fetch();
-console.log(quotes);
+// console.log(quotes);
 
 
-//View
-var QuoteView = Backbone.View.extend({
-  tagName: 'article',
-  id: 'quote-view',
-  classname:'quote',
+//Collection View
+var QuotesView = Backbone.View.extend({
   render: function(){
-    //var html = '<h3>' + this.model.get('quote') + '</h3>'
-    //this.$el.html(html);
+    this.collection.forEach(this.addOne, this);
+  },
+  addOne: function(){
+    var quoteView = new QuoteView({model: model});
+    this.$el.append(quoteView.render().el);
+    console.log(quoteView);
   }
 });
 
-// var quoteView = new QuoteView({model: quote});
-// quote.render();
+//Model View
+var QuoteView = Backbone.View.extend({
+  template: _.template('<h1>Hi</h1>'),
+  render: function(){
+    this.$el.html(this.template(this.model.toJSON()));
+    return this;
+  }
+});
+
+var quotesView = new QuotesView({collection: quotes});
+$('div').html(quotesView.render().el);
+// console.log(quotesView);
+
+
 
