@@ -1,36 +1,26 @@
 //Model
 var Quote = Backbone.Model.extend({
+  rootUrl: "http://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json",
   defaults: {
-     quote: "",
-     context: "",
-     source: "",
-     theme: ""
-   }
+    context: "",
+    quote: "",
+    source: "",
+    theme: ""
+  }
 });
 
 //Collection
 var Quotes = Backbone.Collection.extend({
   model: Quote,
   url: "http://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json",
-  getData: function(){
-    var request = $.ajax({
-      url: this.url,
-      type: "GET"
-    });
-    request.success(function(response){
-      console.log(response);
-      quotes.reset(response);
-      console.log(quotes);
-    });
+  parse: function(data){
+    return data;
   }
 });
 
 var quotes = new Quotes();
-
-quotes.getData();
-
-
-
+quotes.fetch();
+console.log(quotes);
 
 
 //View
