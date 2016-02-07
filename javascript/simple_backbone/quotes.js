@@ -1,5 +1,12 @@
 //Model
-var Quote = Backbone.Model.extend({});
+var Quote = Backbone.Model.extend({
+  defaults: {
+     quote: "",
+     context: "",
+     source: "",
+     theme: ""
+   }
+});
 
 //Collection
 var Quotes = Backbone.Collection.extend({
