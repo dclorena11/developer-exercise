@@ -76,6 +76,12 @@ class Game
     @users << user
   end
 
+  def deal_to_users
+    @users.each do |user|
+      2.times {user.hand << @deck.deal_card}
+    end
+  end
+
 end
 
 # require 'test/unit'
