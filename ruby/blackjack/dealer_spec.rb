@@ -13,7 +13,7 @@ describe Dealer do
     end
 
     it 'has an empty hand' do
-      expect(dealer.hand.length).to eq(0)
+      expect(dealer.hand.cards.length).to eq(0)
     end
   end
 

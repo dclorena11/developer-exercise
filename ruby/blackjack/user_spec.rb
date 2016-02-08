@@ -13,8 +13,9 @@ describe User do
     end
 
     it 'has an empty hand' do
-      expect(user.hand.length).to eq(0)
+      expect(user.hand.cards.length).to eq(0)
     end
   end
+
 
 end

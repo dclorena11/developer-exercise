@@ -49,20 +49,47 @@ class Hand
   def initialize
     @cards = []
   end
+
+  def sum
+    @sum = @cards.map(&:value).flatten.reduce(:+)
+    if @cards.any? { |card| card.name == :ace }
+      if @sum <= 22
+        @sum - 1
+      else
+        @sum - 11
+      end
+    else
+      @sum
+    end
+  end
+
+  def is_a_bust?
+    if sum > 21
+      true
+    else
+      false
+    end
+  end
 end
 
 class User
   attr_accessor :name, :hand
+
   def initialize(name)
     @name = name
-    @hand = []
+    @hand = Hand.new
   end
+
 end
 
 class Dealer < User
+  def showing_card
+    @hand.cards[0]
+  end
 end
 
 class Player < User
+
 end
 
 class Game
@@ -78,7 +105,13 @@ class Game
 
   def deal_to_users
     @users.each do |user|
-      2.times {user.hand << @deck.deal_card}
+      2.times {user.hand.cards << @deck.deal_card}
+    end
+  end
+
+  def dealer
+    @users.find do |user|
+      user.is_a?(Dealer)
     end
   end
 
