@@ -1,19 +1,19 @@
 require_relative 'blackjack'
 
-describe User do
+describe Player do
   describe '#initialize' do
-    let(:user) { User.new("Lorena") }
+    let(:player) { Player.new("Lorena") }
 
     it 'can create an instance of a User' do
-      expect(user).to be_a User
+      expect(player).to be_a User
     end
 
     it 'has a name' do
-      expect(user.name).to eq("Lorena")
+      expect(player.name).to eq("Lorena")
     end
 
     it 'has an empty hand' do
-      expect(user.hand.length).to eq(0)
+      expect(player.hand.length).to eq(0)
     end
   end
 
