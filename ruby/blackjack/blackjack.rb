@@ -60,12 +60,21 @@ class User
 end
 
 class Dealer < User
-
-
 end
 
 class Player < User
+end
 
+class Game
+  attr_accessor :deck, :users
+  def initialize
+    @deck = Deck.new
+    @users = []
+  end
+
+  def add_user(user)
+    @users << user
+  end
 
 end
 
