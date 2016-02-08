@@ -8,14 +8,10 @@ var Quotes = Backbone.Collection.extend({
   model: Quote,
   url: "http://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json",
   parse: function(data){
-    console.log(data);
+    // console.log(data);
     return data; //this returns a collection of models
   }
 });
-
-var quotes = new Quotes();
-quotes.fetch();
-console.log(quotes);
 
 
 //Collection View
@@ -39,9 +35,17 @@ var QuoteView = Backbone.View.extend({
   }
 });
 
-var quotesView = new QuotesView({collection: quotes});
-$('div').html(quotesView.render());
+
 // console.log(quotesView);
 
+$(document).ready(function(){
+  //fetch collection
+  var quotes = new Quotes();
+  quotes.fetch({reset: true});
+  console.log(quotes);
 
+  //Initialize Collection View
+  var quotesView = new QuotesView({collection: quotes});
+  $('div').html(quotesView.render());
+});
 
