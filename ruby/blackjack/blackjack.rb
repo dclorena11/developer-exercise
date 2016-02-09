@@ -51,15 +51,23 @@ class Hand
   end
 
   def sum
-    @sum = @cards.map(&:value).flatten.reduce(:+)
-    if @cards.any? { |card| card.name == :ace }
-      if @sum <= 22
-        @sum - 1
+    points = @cards.map(&:value).flatten.reduce(:+)
+    num_of_aces = @cards.map(&:name).count(:ace)
+
+    if num_of_aces == 1
+      if points <= 22
+        points - 1
       else
-        @sum - 11
+        points - 11
       end
+    elsif num_of_aces == 2
+      points - 10
+    elsif num_of_aces == 3
+      points - 30
+    elsif num_of_aces == 4
+      points - 40
     else
-      @sum
+      points
     end
   end
 
