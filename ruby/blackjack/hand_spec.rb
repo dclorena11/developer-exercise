@@ -9,7 +9,7 @@ describe Hand do
     before :each do
       game.add_user(lorena)
       game.add_user(winnie)
-      game.deal_to_users
+      game.initial_deal
     end
 
     it 'User can check to see dealer\'s card' do
@@ -23,7 +23,7 @@ describe Hand do
 
     before :each do
       game.add_user(lorena)
-      game.deal_to_users
+      game.initial_deal
     end
 
     it 'can check if sum is over 21' do

@@ -27,26 +27,6 @@ describe Game do
 
   end
 
-  describe "#deal_to_users" do
-    let(:game) { Game.new }
-    let(:lorena) {Player.new("Lorena")}
-    let(:winnie) {Dealer.new("Winnie")}
-
-    before :each do
-      game.add_user(lorena)
-      game.add_user(winnie)
-      game.deal_to_users
-    end
-
-    it 'can deal 2 cards to each player' do
-      expect(lorena.hand.cards.length).to eq(2)
-    end
-
-    it 'can deal 2 cards to dealer' do
-      expect(winnie.hand.cards.length).to eq (2)
-    end
-  end
-
   describe "#dealer" do
     let(:game) { Game.new }
     let(:lorena) {Player.new("Lorena")}
@@ -55,7 +35,7 @@ describe Game do
     before :each do
       game.add_user(lorena)
       game.add_user(winnie)
-      game.deal_to_users
+      game.initial_deal
     end
 
     it 'knows who the dealer is' do

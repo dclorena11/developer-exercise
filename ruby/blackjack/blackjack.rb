@@ -71,28 +71,64 @@ class Hand
     end
   end
 
+  def is_a_stay?
+    return true if sum == 17
+    return false if sum != 17
+  end
+
   def is_a_bust?
-    if sum > 21
-      true
-    else
-      false
-    end
+    return true if sum > 21
+    return false if sum <= 21
+  end
+
+  def is_blackjack?
+    return true if sum == 21
+    return false if sum < 21 || sum > 21
   end
 end
 
 class User
-  attr_accessor :name, :hand
+  attr_accessor :name, :hand, :in_game, :winner
 
   def initialize(name)
     @name = name
     @hand = Hand.new
+    @in_game = true
+    @winner = false
   end
 
+  def draw_card(card)
+    if @hand.is_a_stay? && self.in_game
+      "It's a good idea to stay since you card total is 17"
+    elsif self.in_game
+      @hand.cards << card
+      if @hand.is_a_bust?
+        @in_game = false
+        "You bust! You card total is #{@hand.sum}."
+      elsif @hand.is_blackjack?
+        @in_game = false
+        @winner = true
+        "You have blackjack!"
+      elsif @hand.sum == 21
+        @in_game = false
+        "Nice! Your cards add up to 21!"
+      else
+        "Your cards add up to #{@hand.sum}."
+      end
+    else
+      "You are not in the game anymore."
+  end
 end
 
 class Dealer < User
   def showing_card
     @hand.cards[0]
+  end
+
+  def start_deal(game, card_1, card_2)
+    game.users.each do |user|
+      2.times {user.hand.cards << game.deck.deal_card}
+    end
   end
 end
 
@@ -109,12 +145,6 @@ class Game
 
   def add_user(user)
     @users << user
-  end
-
-  def deal_to_users
-    @users.each do |user|
-      2.times {user.hand.cards << @deck.deal_card}
-    end
   end
 
   def dealer
