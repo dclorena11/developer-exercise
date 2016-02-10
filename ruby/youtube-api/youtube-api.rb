@@ -5,5 +5,5 @@ require_relative 'search'
 get '/search' do
   searcher = YoutubeSearcher.new
   return response = searcher.get_videos(params[:q])
-  render json: response
+  render json: {videos: response}
 end
