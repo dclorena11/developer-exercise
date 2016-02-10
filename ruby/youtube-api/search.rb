@@ -17,11 +17,11 @@ class YoutubeSearcher
   end
 
   def jsonify(videos)
-    accumulator = []
+    accumulator = {}
     videos.each do |video|
-      accumulator << {video["snippet"]["title"] => url(video["id"]["videoId"])}.to_json
+      accumulator.merge!({video["snippet"]["title"] => url(video["id"]["videoId"])})
     end
-    accumulator
+    return accumulator.to_json
   end
 
   def url(video_id)
