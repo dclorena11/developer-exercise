@@ -17,11 +17,24 @@ var quotes = new Quotes([], {
   }
 });
 
-//Quote View
-var QuoteView = Backbone.View.extend({})
+//Quotes View
+var QuotesView = Backbone.View.extend({
+  el:".content",
+  initialize: function(){
+    this.render();
+  },
+  render: function(){
+    var template = _.template($('#quote-list-template').html(), {quotes: quotes.models});
+    this.$el.render(template);
+  }
+})
 
-quotes.getFirstPage({fetch: true});
-quotes.getPreviousPage({fetch: true});
-quotes.getNextPage({fetch: true});
-quotes.getLastPage({fetch: true});
-console.log(quotes);
+//Instance of Quotes View
+
+quotes.fetch({
+  reset: true,
+  success: function(models){
+    console.log(models);
+  }
+});
+var quotesView = new QuotesView();
