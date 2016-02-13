@@ -10,8 +10,27 @@
 </head>
 <body>
   <h1>Quotes</h1>
-  <div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Quote</th>
+        <th>Context</th>
+        <th>Source</th>
+        <th>Theme</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% _.each(Quotes, function(quote) { %>
+        <tr>
+          <td><%= quote.get('quote') %></td>
+          <td><%= quote.get('context') %></td>
+          <td><%= quote.get('source') %></td>
+          <td><%= quote.get('theme') %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
 
 </body>
 </html>

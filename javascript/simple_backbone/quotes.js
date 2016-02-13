@@ -17,6 +17,9 @@ var quotes = new Quotes([], {
   }
 });
 
+//Quote View
+var QuoteView = Backbone.View.extend({})
+
 quotes.getFirstPage({fetch: true});
 quotes.getPreviousPage({fetch: true});
 quotes.getNextPage({fetch: true});
