@@ -13,7 +13,7 @@ describe Player do
     end
 
     it 'has an empty hand' do
-      expect(player.hand.length).to eq(0)
+      expect(player.hand.cards.length).to eq(0)
     end
   end
 

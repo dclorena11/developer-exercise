@@ -9,7 +9,7 @@ describe Hand do
     before :each do
       game.add_user(lorena)
       game.add_user(winnie)
-      game.initial_deal
+      winnie.start_deal(game)
     end
 
     it 'User can check to see dealer\'s card' do
@@ -20,10 +20,11 @@ describe Hand do
   describe '#is_a_bust?' do
     let(:game) { Game.new }
     let(:lorena) {Player.new("Lorena")}
+    let(:winnie) {Dealer.new("Winnie")}
 
     before :each do
       game.add_user(lorena)
-      game.initial_deal
+      winnie.start_deal(game)
     end
 
     it 'can check if sum is over 21' do

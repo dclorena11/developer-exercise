@@ -35,7 +35,7 @@ describe Game do
     before :each do
       game.add_user(lorena)
       game.add_user(winnie)
-      game.initial_deal
+      winnie.start_deal(game)
     end
 
     it 'knows who the dealer is' do
