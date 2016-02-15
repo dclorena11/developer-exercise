@@ -17,16 +17,17 @@ describe Dealer do
     end
   end
 
-  pending "#initial_deal" do
-    # let(:game) { Game.new }
-    # let(:lorena) {Player.new("Lorena")}
-    # let(:winnie) {Dealer.new("Winnie")}
+  describe "#start_deal" do
+    let(:game) { Game.new }
+    let(:lorena) {Player.new("Lorena")}
+    let(:winnie) {Dealer.new("Winnie")}
+    let(:deck) {Deck.new}
 
-    # before :each do
-    #   game.add_user(lorena)
-    #   game.add_user(winnie)
-    #   game.initial_deal
-    # end
+    before :each do
+      game.add_user(lorena)
+      game.add_user(winnie)
+      winnie.start_deal(game)
+    end
 
     it 'can deal 2 cards to each player' do
       expect(lorena.hand.cards.length).to eq(2)
