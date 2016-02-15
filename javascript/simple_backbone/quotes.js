@@ -1,40 +1,51 @@
 var PageableCollection = Backbone.PageableCollection;
 
 //Model
-var Quote = Backbone.Model.extend({});
+var Quote = Backbone.Model.extend({
+  defaults: {
+    quote: '',
+    context: '',
+    source: '',
+    theme: ''
+  }
+});
 
 //Collection
 var Quotes = Backbone.PageableCollection.extend({
   model: Quote,
-  url: "https://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json"
-});
-
-//Instance of Pageable Collection
-var quotes = new Quotes([], {
+  url: "https://gist.githubusercontent.com/anonymous/8f61a8733ed7fa41c4ea/raw/1e90fd2741bb6310582e3822f59927eb535f6c73/quotes.json",
+  parse: function(data){
+    console.log(data);
+    return data;
+  },
   mode: "client",
   state: {
     pageSize: 15
   }
 });
 
-//Quotes View
+
+//View
 var QuotesView = Backbone.View.extend({
-  el:".content",
-  initialize: function(){
-    this.render();
-  },
-  render: function(){
-    var template = _.template($('#quote-list-template').html(), {quotes: quotes.models});
-    this.$el.render(template);
-  }
-})
+    el: '.content',
 
-//Instance of Quotes View
+    initialize:function(){
+      this.collection = new Quotes();
+      this.collection.on('reset', function(){
+          this.render();
+        }, this);
 
-quotes.fetch({
-  reset: true,
-  success: function(models){
-    console.log(models);
-  }
+      this.collection.fetch({reset: true});
+    },
+    render: function () {
+      var quotesGroup = this.collection.models;
+      console.log(quotesGroup);
+      var template = _.template($('#quote-list-template').html(), {quotes: quotesGroup});
+      this.$el.html(template);
+    }
 });
-var quotesView = new QuotesView();
+
+
+$(document).ready(function(){
+  var quotesView = new QuotesView({});
+});

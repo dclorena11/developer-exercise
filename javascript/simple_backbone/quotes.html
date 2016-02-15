@@ -3,17 +3,18 @@
 <html>
 <head>
   <script src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="node_modules/underscore/underscore.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
   <script src="node_modules/backbone.paginator/lib/backbone.paginator.js"></script>
   <script src="quotes.js"></script>
 </head>
 <body>
   <h1>Quotes</h1>
+
+
+
   <div class="content"></div>
-
   <script type="text/template" id="quote-list-template">
-
     <table>
       <thead>
         <tr>
@@ -25,16 +26,24 @@
       </thead>
       <tbody>
 
-        <% _.each(quotes, function(quote) { %>
+        <% _.each(this.quotes, function(quote) { %>
           <tr>
-            <td><%= quote.quote %></td>
-            <td><%= quote.context %></td>
-            <td><%= quote.source %></td>
-            <td><%= quote.theme %></td>
+            <td>hello</td>
+            <td>hello</td>
+            <td>hello</td>
+            <td>hello</td>
+
+          </tr>
+          <tr>
+            <td><%= quote.attributes.quote %></td>
+            <td><%= quote.attributes.context %></td>
+            <td><%= quote.attributes.source %></td>
+            <td><%= quote.attributes.theme %></td>
           </tr>
         <% }); %>
       </tbody>
     </table>
   </script>
+
 </body>
 </html>
